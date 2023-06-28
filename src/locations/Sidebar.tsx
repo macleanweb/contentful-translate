@@ -10,6 +10,7 @@ const Sidebar = () => {
   const sdk = useSDK<SidebarAppSDK>();
   const [htmlToTranslate, setHtmlToTranslate] = useState('');
   const [localesToTranslate, setLocalesToTranslate] = useState<string[]>([]);
+  const availableLocales = sdk.locales.available;
 
   deepLTranslate('helloWorld', 'NL');
 
@@ -26,8 +27,7 @@ const Sidebar = () => {
 
   function clickHandler() {
     const sourceValue = sdk.entry.fields.textMd.getValue();
-    const htmlSourceValue = marked.parse(sourceValue)
-    const availableLocales = sdk.locales.available;
+    const htmlSourceValue = marked.parse(sourceValue);
     setHtmlToTranslate(htmlSourceValue);
     setLocalesToTranslate(availableLocales);
   };

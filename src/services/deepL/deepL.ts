@@ -1,8 +1,13 @@
+import { SidebarAppSDK } from '@contentful/app-sdk';
+import { useSDK } from '@contentful/react-apps-toolkit';
 const API_URL = 'https://hp-translate.netlify.app/.netlify/functions/translate';
-const API_KEY = process.env.DEEPL_API_KEY;
 
 export async function deepLTranslate(text: string, targetLang: string) {
-    console.log('deeplTranslate', text, targetLang);
+    const sdk = useSDK<SidebarAppSDK>();
+    // todo: move to installation parameters
+    const API_KEY = sdk.parameters.instance.deeplApiKey;
+    console.log(sdk);
+    console.log(API_KEY);
     if (!text || !targetLang) {
         throw new Error(
             `Missing required parameters provided text: ${text}, targetLang: ${targetLang}
